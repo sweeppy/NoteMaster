@@ -1,0 +1,58 @@
+# Ignore files for .NET Core
+## Ignore build output
+bin/
+obj/
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core
+## Auto-generated files
+*.vs/
+.vscode/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Node.js / React
+## Node modules directory
+node_modules/
+## Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+## Build output
+build/
+dist/
+## Environment variables
+.env
+
+# OS-specific files
+## Windows
+Thumbs.db
+ehthumbs.db
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+## Linux
+*~
+
+# Miscellaneous
+## IDE-specific files
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+## Ignore coverage reports
+coverage/
+lcov-report/
+
+# Database and migrations
+Migrations/
+
+# Other
+*.log
