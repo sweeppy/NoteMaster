@@ -6,4 +6,4 @@ NoteMaster is a simple and intuitive note-taking application built with C# (ASP.
 - **Database:** SQL Server(using Azure Data Studio)
 - **Authentication:** JWT (JSON Web Tokens)
 ## Visual representation:
-<img src="https://github.com/sweeppy/NoteMaster/blob/main/README%20images/welcomePage.png" alt="Welcome page" height="200" width="300" />
+<img src="https://github.com/sweeppy/NoteMaster/blob/main/README%20images/welcomePage.png" alt="Welcome page" height="216" width="384" />
