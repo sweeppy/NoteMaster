@@ -3,7 +3,7 @@ interface Props {
 }
 const Header = ({ children }: Props) => {
   return (
-    <header className="header font-weight-800 font-size-large">
+    <header className="header font-weight-800 font-ultra-large">
       {children}
     </header>
   );

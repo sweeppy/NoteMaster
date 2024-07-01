@@ -1,15 +1,18 @@
-import Header from "./Components/Header";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./Components/Auth/Login";
+import SignUp from "./Components/Auth/SignUp";
+import WelcomePage from "./Components/WelcomePage/WelcomePage";
 import "./App.css";
-import StartButton from "./Components/WelcomePage/StartButton";
 
 const App = () => {
-  const welcomeText = "plan, write, learn, stay productive";
   return (
-    <div className="header-container">
-      <Header>NoteMaster</Header>
-      <div className="text-under-header">{welcomeText}</div>
-      <StartButton>Start</StartButton>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/register" element={<SignUp />} />
+      </Routes>
+    </Router>
   );
 };
 
