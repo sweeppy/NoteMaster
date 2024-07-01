@@ -53,9 +53,10 @@
   animation:
     fadeIn 0.5s ease-out forwards 1.1s,
     slideInFromBottom 0.5s ease-out forwards 1.1s;
+  transition: all 0.3s;
 }
 .btn-start:hover {
-  transform: scale(1.02);
+  scale: 1.05;
 }
 .container {
   height: 100vh;

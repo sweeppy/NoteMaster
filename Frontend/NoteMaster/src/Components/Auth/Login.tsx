@@ -4,16 +4,12 @@ import AuthHeader from "./AuthHeader";
 const Login = () => {
   return (
     <div className="container">
-      <div className="login-container">
+      <div className="auth-container">
         <AuthHeader>Login</AuthHeader>
-        <div className="inputs">
-          <input className="font-medium" placeholder="email" type="text" />
-          <input
-            className="font-medium"
-            placeholder="password"
-            type="password"
-          />
-        </div>
+
+        <input className="font-medium" placeholder="email" type="text" />
+        <input className="font-medium" placeholder="password" type="password" />
+
         <AuthBtn
           btnText="Continue"
           onClick={() => console.log("login")}
