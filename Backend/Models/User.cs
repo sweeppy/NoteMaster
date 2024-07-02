@@ -12,10 +12,14 @@ namespace Backend.Models
             this.Email = Email;
             this.Username = Username;
             this.Password = Password;
+            this.Notes = new List<Note>();
         }
+
         public Guid Id { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+
+        public ICollection<Note> Notes{ get; set; }
     }
 }

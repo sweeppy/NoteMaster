@@ -56,3 +56,7 @@ Migrations/
 
 # Other
 *.log
+
+# Ignore appsettings.json and related files
+appsettings.json
+appsettings.*.json
