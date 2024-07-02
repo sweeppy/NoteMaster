@@ -9,6 +9,14 @@
     transform: rotate3d(0);
   }
 }
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 a {
   text-decoration: none;
   color: #f5f7f8;
@@ -40,7 +48,9 @@ input {
   align-items: center;
   padding: 40px;
   border-radius: 30px;
-  animation: scaleIn ease-out 0.6s forwards;
+  animation:
+    fadeIn ease-out 0.6s forwards,
+    slideFromTop ease-out 0.6s forwards;
   color: #f5f7f8;
 }
 .inputs {

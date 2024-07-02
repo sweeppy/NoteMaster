@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Backend.Models
 {
     public class Note
     {
-        public Note(string Title, string Description)
+        public Note()
+        {
+            
+        }
+        public Note(string Title, string Description, User User)
         {
             this.Title = Title;
             this.Description = Description;
-            this.CreatedDate = DateTime.Now;
+            this.CreatedDate = DateTime.UtcNow;
+            this.User = User;
         }
         public Guid Id { get; set; }
         public string Title { get; set; }

@@ -7,6 +7,10 @@ namespace Backend.Models
 {
     public class User
     {
+        public User()
+        {
+            
+        }
         public User(string Email,string Username, string Password)
         {
             this.Email = Email;
