@@ -11,7 +11,7 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignUp = async () => {
+  const postRegister = async () => {
     console.log("registration");
     const isRegistered = await handleRegister({ email, username, password });
     if (isRegistered == true) {
@@ -45,7 +45,7 @@ const SignUp = () => {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <AuthBtn btnText="Continue" onClick={handleSignUp}></AuthBtn>
+        <AuthBtn btnText="Continue" onClick={postRegister}></AuthBtn>
         <a href="/login" style={{ marginTop: "3%" }}>
           Already registered
         </a>

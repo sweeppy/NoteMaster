@@ -21,10 +21,31 @@ namespace Backend.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginModel model)
         {
-            return Ok();
+            if (model == null) return BadRequest("Empty data");
+
+            try
+            {
+                User user = await _userRepository.GetByEmailAsync(model.Email);
+
+                if (user == null) return BadRequest("Invalid email.");
+
+                if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+                {
+                    return BadRequest("Invalid password");
+                }
+
+                var token = _jwtService.GenerateToken(user.Email);
+
+                return Ok(new {token});
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {

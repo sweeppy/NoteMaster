@@ -14,6 +14,28 @@ body {
   }
 }
 
+@keyframes dropDownMenu {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes dropUpMenu {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
 .collection-strip {
   display: flex;
   position: fixed;
@@ -32,6 +54,7 @@ body {
   list-style: none;
   gap: 20px;
   padding-left: 20px;
+  animation: dropDown 1s ease-out forwards;
 }
 .collection-item {
   background-color: #f5f7f8;
@@ -66,11 +89,16 @@ body {
   background-color: #f4ce14;
   border-radius: 10px;
   padding: 8px;
+  border: none;
   margin-left: auto;
   margin-right: 40px;
   cursor: pointer;
+  transition: all 0.3s;
 }
-
+.nav-btn:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
 @media (max-width: 1030px) {
   .collection-items,
   .logOutBtn {
@@ -80,6 +108,11 @@ body {
     display: block;
   }
 }
+.iconContainer {
+  width: 74px;
+  height: 36px;
+}
 .show {
-  display: flex !important; /* чтобы показать скрытые элементы при необходимости */
+  display: flex !important;
+  animation: dropDown 0.5s ease-out forwards;
 }
