@@ -12,6 +12,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
 
   const handleSignUp = async () => {
+    console.log("registration");
     const isRegistered = await handleRegister({ email, username, password });
     if (isRegistered == true) {
       navigate("/notes");

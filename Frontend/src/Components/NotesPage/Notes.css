@@ -1,0 +1,85 @@
+body {
+  margin: 0 !important;
+}
+.notes {
+  font-family: "Nunito", sans-serif;
+}
+
+@keyframes dropDown {
+  0% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.collection-strip {
+  display: flex;
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  background-color: #45474b;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  animation: dropDown 0.8s ease-out forwards;
+}
+.collection-items {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding-left: 20px;
+}
+.collection-item {
+  background-color: #f5f7f8;
+  text-wrap: nowrap;
+  border-radius: 10px;
+  padding: 8px;
+  transition: all 0.3s;
+  border: none;
+}
+.collection-item:hover {
+  cursor: pointer;
+  scale: 1.05;
+}
+.logOutBtn {
+  background-color: #f4ce14;
+  border-radius: 10px;
+  padding: 8px;
+  width: 100px;
+  transition: all 0.3s;
+  margin-left: auto;
+  margin-right: 40px;
+  border: none;
+  text-align: center;
+}
+.logOutBtn:hover {
+  cursor: pointer;
+  scale: 1.05;
+}
+
+.nav-btn {
+  display: none;
+  background-color: #f4ce14;
+  border-radius: 10px;
+  padding: 8px;
+  margin-left: auto;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+@media (max-width: 1030px) {
+  .collection-items,
+  .logOutBtn {
+    display: none;
+  }
+  .nav-btn {
+    display: block;
+  }
+}
+.show {
+  display: flex !important; /* чтобы показать скрытые элементы при необходимости */
+}

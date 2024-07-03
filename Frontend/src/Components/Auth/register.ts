@@ -20,6 +20,7 @@ export const handleRegister = async ({
     if (response.status === 200) {
       const data = response.data;
       localStorage.setItem("token", data.token);
+      console.log(data.token);
       console.log("Complete register");
       return true;
     } else {
