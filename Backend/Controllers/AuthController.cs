@@ -23,7 +23,7 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            if (model == null) return BadRequest("Empty data");
+            if (model.Email == "" || model.Password == "") return BadRequest("Empty data");
 
             try
             {
@@ -33,7 +33,7 @@ namespace Backend.Controllers
 
                 if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                 {
-                    return BadRequest("Invalid password");
+                    return BadRequest("Invalid password.");
                 }
 
                 var token = _jwtService.GenerateToken(user.Email);

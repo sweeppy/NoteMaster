@@ -63,7 +63,6 @@ input {
 }
 
 .authBtn {
-  cursor: pointer;
   width: 150px;
   height: 40px;
   border: none;
@@ -72,7 +71,7 @@ input {
   color: #45474b;
   justify-self: center;
   align-self: center;
-  opacity: 0.8;
+  opacity: 0.5;
   transition: all 0.3s;
 }
 

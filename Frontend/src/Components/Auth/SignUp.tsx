@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { handleRegister } from "./register";
 import AuthBtn from "./AuthBtn";
 import AuthHeader from "./AuthHeader";
@@ -10,6 +10,15 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isBtnEnabled, setIsBtnEnabled] = useState(false);
+
+  useEffect(() => {
+    if (email !== "" && password !== "") {
+      setIsBtnEnabled(true);
+    } else {
+      setIsBtnEnabled(false);
+    }
+  });
 
   const postRegister = async () => {
     console.log("registration");
@@ -45,7 +54,12 @@ const SignUp = () => {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <AuthBtn btnText="Continue" onClick={postRegister}></AuthBtn>
+        <AuthBtn
+          btnText="Continue"
+          onClick={postRegister}
+          style={{ opacity: isBtnEnabled ? 1 : 0.5 }}
+          disabled={!isBtnEnabled}
+        ></AuthBtn>
         <a href="/login" style={{ marginTop: "3%" }}>
           Already registered
         </a>
