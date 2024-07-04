@@ -75,6 +75,6 @@ input {
   transition: all 0.3s;
 }
 
-.authBtn:hover {
+.authBtn:enabled:hover {
   scale: 1.05;
 }

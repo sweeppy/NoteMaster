@@ -6,7 +6,7 @@ interface RegisterParams {
   password: string;
 }
 
-export const handleRegister = async ({
+export const backendRegister = async ({
   email,
   username,
   password,
@@ -20,14 +20,11 @@ export const handleRegister = async ({
     if (response.status === 200) {
       const data = response.data;
       localStorage.setItem("token", data.token);
-      console.log(data.token);
-      console.log("Complete register");
-      return true;
-    } else {
       return null;
+    } else {
+      return response.data;
     }
-  } catch (error) {
-    console.error("An error occurred during registration:", error);
-    return false;
+  } catch (error: any) {
+    return error.response.data;
   }
 };

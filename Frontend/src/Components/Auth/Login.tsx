@@ -14,7 +14,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const [alertText, setAlertText] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
 
   const [isButtonEnabled, setIsBtnEnabled] = useState(false);
 
@@ -27,22 +26,16 @@ const Login = () => {
   }, [email, password]);
 
   const handleLogin = async () => {
-    const response = await postLogin();
+    const response = await backendLogin({ email, password });
     if (response == null) {
       navigation("/notes");
     } else {
       setAlertText(response);
-      setShowAlert(true);
     }
   };
 
-  const postLogin = async () => {
-    const response = await backendLogin({ email, password });
-    return response;
-  };
-
   const handleCloseAlert = () => {
-    setShowAlert(false);
+    setAlertText("");
   };
 
   return (
@@ -81,9 +74,7 @@ const Login = () => {
           No account yet
         </a>
       </div>
-      {showAlert && (
-        <DangerAlert alertText={alertText} onClose={handleCloseAlert} />
-      )}
+      <DangerAlert alertText={alertText} onClose={handleCloseAlert} />
     </div>
   );
 };

@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { handleRegister } from "./register";
+import { backendRegister } from "./register";
 import AuthBtn from "./AuthBtn";
 import AuthHeader from "./AuthHeader";
 import { useNavigate } from "react-router-dom";
+import DangerAlert from "../DangerAlert";
 
 const SignUp = () => {
-  const navigate = useNavigate();
+  const navigation = useNavigate();
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isBtnEnabled, setIsBtnEnabled] = useState(false);
+  const [alertText, setAlertText] = useState("");
 
   useEffect(() => {
-    if (email !== "" && password !== "") {
+    if (email !== "" && password !== "" && username !== "") {
       setIsBtnEnabled(true);
     } else {
       setIsBtnEnabled(false);
@@ -21,15 +23,16 @@ const SignUp = () => {
   });
 
   const postRegister = async () => {
-    console.log("registration");
-    const isRegistered = await handleRegister({ email, username, password });
-    if (isRegistered == true) {
-      navigate("/notes");
-    } else if (isRegistered == false) {
-      //alert
+    const response = await backendRegister({ email, username, password });
+    if (response == null) {
+      navigation("/notes");
     } else {
-      //alert
+      setAlertText(response);
     }
+  };
+
+  const handleCloseAlert = () => {
+    setAlertText("");
   };
 
   return (
@@ -64,6 +67,7 @@ const SignUp = () => {
           Already registered
         </a>
       </div>
+      <DangerAlert alertText={alertText} onClose={handleCloseAlert} />
     </div>
   );
 };

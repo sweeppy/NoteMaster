@@ -1,23 +1,12 @@
-import { useState } from "react";
-
 interface Props {
   alertText: string;
   onClose: () => void;
 }
 const DangerAlert = ({ alertText, onClose }: Props) => {
-  const [closed, setClosed] = useState(false);
-
-  const handleClosed = () => {
-    setClosed(true);
-    onClose();
-  };
-
   return (
-    <div
-      className={`alert danger ${alertText && !closed ? "visible" : "hidden"}`}
-    >
+    <div className={`alert danger ${alertText ? "visible" : "hidden"}`}>
       {alertText}
-      <button className="close-btn" onClick={handleClosed}>
+      <button className="close-btn" onClick={onClose}>
         {" "}
         &times;
       </button>
