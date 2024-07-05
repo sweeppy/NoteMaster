@@ -1,3 +1,4 @@
+import withAuth from "../WithAuth";
 import Collection from "./Collection";
 import "./Notes.css";
 const Notes = () => {
@@ -8,4 +9,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default withAuth(Notes);

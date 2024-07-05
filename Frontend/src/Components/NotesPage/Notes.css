@@ -75,7 +75,7 @@ body {
   width: 100px;
   transition: all 0.3s;
   margin-left: auto;
-  margin-right: 40px;
+  margin-right: 30px;
   border: none;
   text-align: center;
 }
@@ -101,16 +101,22 @@ body {
 }
 @media (max-width: 1030px) {
   .collection-items,
-  .logOutBtn {
+  .logOutBtn,
+  .add-icon {
     display: none;
   }
   .nav-btn {
     display: block;
   }
 }
-.iconContainer {
-  width: 74px;
-  height: 36px;
+.add-icon {
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  animation: dropDown 1s ease-out backwards;
+}
+.add-icon:hover {
+  transform: scale(1.2) rotateZ(180deg);
 }
 .show {
   display: flex !important;

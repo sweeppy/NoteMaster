@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icon from "./Icon";
 import "./Notes.css";
+import AddIcon from "./AddIcon";
 
 const Collection = () => {
   const [showItems, setShowItems] = useState(false);
@@ -21,6 +22,7 @@ const Collection = () => {
         <li className="collection-item">Note Collection 4</li>
         <li className="collection-item">Note Collection 5</li>
       </ul>
+      <AddIcon />
       <button className="logOutBtn">LogOut</button>
       <button className="nav-btn" onClick={toggleItems}>
         Menu

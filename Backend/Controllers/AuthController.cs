@@ -58,7 +58,13 @@ namespace Backend.Controllers
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password);
             try
             {
-                User newUser = new User(model.Email, model.Username, hashedPassword);
+                User newUser = new User()
+                {
+                    Email = model.Email,
+                    Password = hashedPassword,
+                    Username = model.Username,
+                    Collections = new List<Collection>()
+                };
 
                 await _userRepository.AddUserToDbAsync(newUser);
 

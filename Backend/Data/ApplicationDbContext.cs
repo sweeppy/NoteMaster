@@ -22,13 +22,19 @@ namespace Backend.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>()
-            .HasMany(u => u.Notes)
-            .WithOne(n => n.User)
+            .HasMany(u => u.Collections)
+            .WithOne(c => c.User)
             .HasForeignKey(n => n.UserId);
+
+            modelBuilder.Entity<Collection>()
+            .HasMany(c => c.Notes)
+            .WithOne(n => n.Collection)
+            .HasForeignKey(n => n.CollectionId);
         }
 
         public DbSet<User> Users { get; set; }
 
         public DbSet<Note> Notes{ get; set; }
+        public DbSet<Collection> Collections{ get; set; }
     }
 }
