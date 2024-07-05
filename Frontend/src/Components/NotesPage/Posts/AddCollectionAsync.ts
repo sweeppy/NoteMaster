@@ -25,7 +25,7 @@ export const addCollectionAsync = async ({
     );
 
     if (response.status === 200) {
-      return response.data;
+      return response;
     } else {
     }
   } catch (error: any) {

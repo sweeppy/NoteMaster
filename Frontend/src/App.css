@@ -92,7 +92,7 @@ h3 {
   position: absolute;
   width: calc(150px + 10%);
   height: 50px;
-  opacity: 0.8;
+  opacity: 1;
   padding: 15px;
   padding-left: 15px;
   padding-top: 3px;
@@ -101,9 +101,13 @@ h3 {
   font-family: "Nunito", sans-serif !important;
   border-radius: 20px;
   animation: slideFromRight 0.5s ease-out forwards;
+  z-index: 10000;
 }
 .danger {
   background-color: #ff6969;
+}
+.success {
+  background-color: #50b498;
 }
 
 .hidden {

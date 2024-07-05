@@ -99,7 +99,7 @@ body {
   scale: 1.05;
   cursor: pointer;
 }
-@media (max-width: 1030px) {
+@media (max-width: 100px) {
   .collection-items,
   .logOutBtn,
   .add-icon {

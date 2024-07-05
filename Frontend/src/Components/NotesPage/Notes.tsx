@@ -3,15 +3,29 @@ import withAuth from "../WithAuth";
 import AddCollection from "./AddCollection";
 import Collection from "./Collection";
 import "./Notes.css";
+import SuccessAlert from "../SuccessAlert";
+import { addCollectionAsync } from "./Posts/AddCollectionAsync";
 
 const Notes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [alertText, setAlertText] = useState("");
+  const [collectionName, setCollectionName] = useState("");
+
   const openModal = () => {
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleAddCollection = async (name: string) => {
+    setCollectionName(name);
+    const response = await addCollectionAsync({ collectionName });
+    if (response?.status === 200) {
+      closeModal();
+      setAlertText(response.data);
+    }
   };
 
   return (
@@ -21,8 +35,11 @@ const Notes = () => {
       </div>
       {isModalOpen && (
         <div className="backdrop" onClick={closeModal}>
-          <AddCollection />
+          <AddCollection onAddCollection={handleAddCollection} />
         </div>
+      )}
+      {alertText && (
+        <SuccessAlert alertText={alertText} onClose={() => setAlertText("")} />
       )}
     </div>
   );

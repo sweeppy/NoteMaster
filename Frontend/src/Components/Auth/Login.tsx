@@ -34,10 +34,6 @@ const Login = () => {
     }
   };
 
-  const handleCloseAlert = () => {
-    setAlertText("");
-  };
-
   return (
     <div className="container">
       <div className="auth-container">
@@ -74,7 +70,7 @@ const Login = () => {
           No account yet
         </a>
       </div>
-      <DangerAlert alertText={alertText} onClose={handleCloseAlert} />
+      <DangerAlert alertText={alertText} onClose={() => setAlertText("")} />
     </div>
   );
 };
