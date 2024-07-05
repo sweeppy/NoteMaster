@@ -5,10 +5,12 @@ import Collection from "./Collection";
 import "./Notes.css";
 import SuccessAlert from "../SuccessAlert";
 import { addCollectionAsync } from "./Posts/AddCollectionAsync";
+import DangerAlert from "../DangerAlert";
 
 const Notes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [alertText, setAlertText] = useState("");
+  const [successAlertText, setsuccessAlertText] = useState("");
+  const [dangerAlertText, setDangerAlertText] = useState("");
   const [collectionName, setCollectionName] = useState("");
 
   const openModal = () => {
@@ -23,9 +25,11 @@ const Notes = () => {
     setCollectionName(name);
     const response = await addCollectionAsync({ collectionName });
     if (response?.status === 200) {
-      closeModal();
-      setAlertText(response.data);
+      setsuccessAlertText(response.data);
+    } else {
+      setDangerAlertText(response?.data);
     }
+    closeModal();
   };
 
   return (
@@ -38,8 +42,17 @@ const Notes = () => {
           <AddCollection onAddCollection={handleAddCollection} />
         </div>
       )}
-      {alertText && (
-        <SuccessAlert alertText={alertText} onClose={() => setAlertText("")} />
+      {successAlertText && (
+        <SuccessAlert
+          alertText={successAlertText}
+          onClose={() => setsuccessAlertText("")}
+        />
+      )}
+      {dangerAlertText && (
+        <DangerAlert
+          alertText={dangerAlertText}
+          onClose={() => setDangerAlertText("")}
+        />
       )}
     </div>
   );

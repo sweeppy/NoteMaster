@@ -12,11 +12,12 @@ namespace Backend.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly ICollectionRepository _collectionRepository;
-
-        public CollectionActionsController(IUserRepository userRepository, ICollectionRepository collectionRepository)
+        private readonly ILogger<CollectionActionsController> _logger;
+        public CollectionActionsController(IUserRepository userRepository, ICollectionRepository collectionRepository, ILogger<CollectionActionsController> logger)
         {
             _userRepository = userRepository;
             _collectionRepository = collectionRepository;
+            _logger = logger;
         }
 
         [HttpPost("add")]
@@ -45,7 +46,8 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                _logger.LogError($"Exeption in the <CollectionActionsController;AddCollection>. Message: ${ex.Message}");
+                return StatusCode(500, "Something went wrong.");
             }
         }
     }
