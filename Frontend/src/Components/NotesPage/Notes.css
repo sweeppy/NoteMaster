@@ -157,6 +157,7 @@ body {
   min-height: 30px;
 }
 .add-btn {
+  opacity: 0.5;
   background-color: #379777;
   border-radius: 10px;
   color: #f5f7f8;
@@ -167,7 +168,11 @@ body {
   height: calc(10px + 3vh);
   transition: all 0.3s;
 }
-.add-btn:hover {
+.add-btn:enabled {
+  opacity: 1;
+  transform: scale(1.03);
+}
+.add-btn:enabled:hover {
   cursor: pointer;
   transform: scale(1.05);
 }

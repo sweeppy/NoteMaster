@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
+import { addCollectionAsync } from "./Posts/AddCollectionAsync";
 import "./Notes.css";
-interface AddCollectionProps {
-  closeModal: () => void;
-}
-const AddCollection = ({ closeModal }: AddCollectionProps) => {
+
+const AddCollection = () => {
+  const [collectionName, setCollectionName] = useState("");
+  const [isAddBtnEnabled, setIsAddBtnEnabled] = useState(false);
+
+  useEffect(() => {
+    if (collectionName !== "") setIsAddBtnEnabled(true);
+    else setIsAddBtnEnabled(false);
+  });
+
+  const handleAddCollection = async () => {
+    const response = await addCollectionAsync({ collectionName });
+  };
   return (
     <div
       className="add-collection-container"
@@ -13,8 +24,17 @@ const AddCollection = ({ closeModal }: AddCollectionProps) => {
         className="add-collection-input"
         type="text"
         placeholder="Collection name"
+        onChange={(e) => {
+          setCollectionName(e.target.value);
+        }}
       />
-      <button className="add-btn">Add</button>
+      <button
+        className="add-btn"
+        disabled={!isAddBtnEnabled}
+        onClick={handleAddCollection}
+      >
+        Add
+      </button>
     </div>
   );
 };

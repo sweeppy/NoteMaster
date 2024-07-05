@@ -6,7 +6,6 @@ import "./Notes.css";
 
 const Notes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -22,7 +21,7 @@ const Notes = () => {
       </div>
       {isModalOpen && (
         <div className="backdrop" onClick={closeModal}>
-          <AddCollection closeModal={closeModal} />
+          <AddCollection />
         </div>
       )}
     </div>

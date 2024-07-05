@@ -2,7 +2,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Npgsql.Replication;
 
 namespace Backend.Jwt
 {
@@ -10,20 +9,16 @@ namespace Backend.Jwt
     {
         public static IServiceCollection AddJwtAuthentication (this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication(options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options => 
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
+                option.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = false,
                     ValidateAudience = false,
+                    ValidateIssuer = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"])),
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 

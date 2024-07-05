@@ -63,7 +63,7 @@ namespace Backend.Controllers
                     Email = model.Email,
                     Password = hashedPassword,
                     Username = model.Username,
-                    Collections = new List<Collection>()
+                    Collections = []
                 };
 
                 await _userRepository.AddUserToDbAsync(newUser);
