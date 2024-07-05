@@ -7,7 +7,6 @@ const DangerAlert = ({ alertText, onClose }: Props) => {
     <div className={`alert danger ${alertText ? "visible" : "hidden"}`}>
       {alertText}
       <button className="close-btn" onClick={onClose}>
-        {" "}
         &times;
       </button>
     </div>

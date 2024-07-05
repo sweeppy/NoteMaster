@@ -31,6 +31,10 @@
   }
 }
 
+h3 {
+  text-align: center;
+}
+
 .header-container {
   height: 100vh;
   display: flex;
@@ -113,7 +117,7 @@
   animation: fadeOut 0.5s forwards;
 }
 .close-btn {
-  position: absolute;
+  position: fixed;
   top: 50%;
   right: 15px;
   transform: translateY(-50%);

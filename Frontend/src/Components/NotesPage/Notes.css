@@ -122,3 +122,52 @@ body {
   display: flex !important;
   animation: dropDown 0.5s ease-out forwards;
 }
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-collection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f7f8;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 101; /* Должен быть выше чем затемнение */
+  min-width: 300px;
+  width: 30%;
+  min-height: 180px;
+  animation:
+    fadeIn 0.5s ease-out forwards,
+    dropDown 0.5s ease-out forwards;
+}
+
+.add-collection-input {
+  min-height: 30px;
+}
+.add-btn {
+  background-color: #379777;
+  border-radius: 10px;
+  color: #f5f7f8;
+  font-family: "Nunito", sans-serif !important;
+  font-size: 15px;
+  border: none;
+  width: calc(100px + 10%);
+  height: calc(10px + 3vh);
+  transition: all 0.3s;
+}
+.add-btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}

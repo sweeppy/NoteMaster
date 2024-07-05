@@ -3,7 +3,11 @@ import Icon from "./Icon";
 import "./Notes.css";
 import AddIcon from "./AddIcon";
 
-const Collection = () => {
+interface Props {
+  openModal: () => void;
+}
+
+const Collection = ({ openModal }: Props) => {
   const [showItems, setShowItems] = useState(false);
   const toggleItems = () => {
     setShowItems(!showItems);
@@ -22,7 +26,7 @@ const Collection = () => {
         <li className="collection-item">Note Collection 4</li>
         <li className="collection-item">Note Collection 5</li>
       </ul>
-      <AddIcon />
+      <AddIcon onAddIconClick={openModal} />
       <button className="logOutBtn">LogOut</button>
       <button className="nav-btn" onClick={toggleItems}>
         Menu

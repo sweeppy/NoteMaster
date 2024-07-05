@@ -1,6 +1,10 @@
-const AddIcon = () => {
+interface Props {
+  onAddIconClick: () => void;
+}
+const AddIcon = ({ onAddIconClick }: Props) => {
   return (
     <svg
+      onClick={onAddIconClick}
       className="add-icon"
       width="32"
       height="32"
