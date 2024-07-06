@@ -12,8 +12,7 @@ export const addCollectionAsync = async ({
     if (!token) {
       throw new Error("Token not found");
     }
-    console.log(token);
-
+    console.log(collectionName);
     const response = await axios.post(
       "http://localhost:5062/CollectionActions/add",
       { collectionName },

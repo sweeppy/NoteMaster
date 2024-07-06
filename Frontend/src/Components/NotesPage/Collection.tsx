@@ -4,11 +4,13 @@ import "./Notes.css";
 import AddIcon from "./AddIcon";
 
 interface Props {
+  collections: any[];
   openModal: () => void;
 }
 
-const Collection = ({ openModal }: Props) => {
+const Collection = ({ openModal, collections }: Props) => {
   const [showItems, setShowItems] = useState(false);
+
   const toggleItems = () => {
     setShowItems(!showItems);
   };
@@ -20,11 +22,11 @@ const Collection = ({ openModal }: Props) => {
       </div>
 
       <ul className="collection-items">
-        <li className="collection-item">Note Collection 1</li>
-        <li className="collection-item">Note Collection 2</li>
-        <li className="collection-item">Note Collection 3</li>
-        <li className="collection-item">Note Collection 4</li>
-        <li className="collection-item">Note Collection 5</li>
+        {collections.map((collection: any) => (
+          <li key={collection.Id} className="collection-item">
+            {collection.collectionName}
+          </li>
+        ))}
       </ul>
       <AddIcon onAddIconClick={openModal} />
       <button className="logOutBtn">LogOut</button>

@@ -1,12 +1,16 @@
 using Backend.Data;
 using Backend.Jwt;
 using Backend.Repositories;
+using Backend.Repositories.MainRepository;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Добавление сервисов
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });;
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -21,6 +25,9 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
+builder.Services.AddScoped<IRepository, Repository>();
+
+
 
 builder.Services.AddJwtAuthentication(builder.Configuration);
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Models;
 using Backend.Repositories;
+using Backend.Repositories.MainRepository;
 
 namespace Backend.Controllers
 {
@@ -10,13 +11,11 @@ namespace Backend.Controllers
     [Route("[controller]")]
     public class CollectionActionsController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
-        private readonly ICollectionRepository _collectionRepository;
+        private readonly IRepository _repository;
         private readonly ILogger<CollectionActionsController> _logger;
-        public CollectionActionsController(IUserRepository userRepository, ICollectionRepository collectionRepository, ILogger<CollectionActionsController> logger)
+        public CollectionActionsController(IRepository repository, ILogger<CollectionActionsController> logger)
         {
-            _userRepository = userRepository;
-            _collectionRepository = collectionRepository;
+            _repository = repository;
             _logger = logger;
         }
 
@@ -31,7 +30,7 @@ namespace Backend.Controllers
 
             var email = User.FindFirst(ClaimTypes.Email)?.Value;
 
-            User user = await _userRepository.GetByEmailAsync(email);
+            User user = await _repository.UserRepository.GetByEmailAsync(email);
 
             if (user == null)
             {
@@ -40,7 +39,7 @@ namespace Backend.Controllers
 
             try
             {
-                await _collectionRepository.CreateCollectionAsync(user, request.CollectionName);
+                await _repository.CollectionRepository.CreateCollectionAsync(user, request.CollectionName);
 
                 return Ok("Collection created successfully!");
             }
@@ -49,6 +48,17 @@ namespace Backend.Controllers
                 _logger.LogError($"Exeption in the <CollectionActionsController;AddCollection>. Message: ${ex.Message}");
                 return StatusCode(500, "Something went wrong.");
             }
+        }
+        [HttpGet("getAll")]
+        [Authorize]
+        public async Task<IActionResult> GetAllCollections()
+        {
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (email == null) return BadRequest("You need to login again.");
+
+            User user = await _repository.UserRepository.GetByEmailAsync(email);
+
+            return Ok(user.Collections);
         }
     }
 }

@@ -1,18 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import withAuth from "../WithAuth";
 import AddCollection from "./AddCollection";
 import Collection from "./Collection";
 import "./Notes.css";
 import SuccessAlert from "../SuccessAlert";
-import { addCollectionAsync } from "./Posts/AddCollectionAsync";
+import { addCollectionAsync } from "./Post/AddCollectionAsync";
 import DangerAlert from "../DangerAlert";
+import { GetCollectionsAsync } from "./Get/GetCollectionsAsync";
 
 const Notes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successAlertText, setsuccessAlertText] = useState("");
   const [dangerAlertText, setDangerAlertText] = useState("");
-  const [collectionName, setCollectionName] = useState("");
 
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    fetchCollections();
+  }, []);
+  const fetchCollections = async () => {
+    try {
+      const response = await GetCollectionsAsync();
+      if (response.status == 200) {
+        const data = response.data;
+        const collectoinsArray = data["$values"].map((item: any) => ({
+          id: item.id,
+          collectionName: item.collectionName,
+        }));
+        console.log(collectoinsArray);
+        setCollections(collectoinsArray);
+      } else {
+        console.error(
+          `Failed to getch collections. Status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      console.error(`Error fetching collections: ${error}`);
+    }
+  };
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -22,9 +47,9 @@ const Notes = () => {
   };
 
   const handleAddCollection = async (name: string) => {
-    setCollectionName(name);
-    const response = await addCollectionAsync({ collectionName });
+    const response = await addCollectionAsync({ collectionName: name });
     if (response?.status === 200) {
+      await fetchCollections();
       setsuccessAlertText(response.data);
     } else {
       setDangerAlertText(response?.data);
@@ -35,7 +60,7 @@ const Notes = () => {
   return (
     <div>
       <div className="notes">
-        <Collection openModal={openModal} />
+        <Collection collections={collections} openModal={openModal} />
       </div>
       {isModalOpen && (
         <div className="backdrop" onClick={closeModal}>
