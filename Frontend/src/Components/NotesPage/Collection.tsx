@@ -2,6 +2,7 @@ import { useState } from "react";
 import Icon from "./Icon";
 import "./Notes.css";
 import AddIcon from "./AddIcon";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   collections: any[];
@@ -9,30 +10,55 @@ interface Props {
 }
 
 const Collection = ({ openModal, collections }: Props) => {
-  const [showItems, setShowItems] = useState(false);
+  const navigate = useNavigate();
+  const [selectedCollection, setSelectedCollection] = useState("");
 
-  const toggleItems = () => {
-    setShowItems(!showItems);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
+  const handleChangingCollection = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedCollection(event.target.value);
+  };
+  const maxCollections = 3;
   return (
     <div className="collection-strip">
       <div className="iconContainer">
         <Icon />
       </div>
+      {collections.length > maxCollections ? (
+        <select
+          className="collection-select"
+          value={selectedCollection}
+          onChange={handleChangingCollection}
+        >
+          {collections.map((collection: any) => (
+            <option
+              key={collection.collectionId}
+              value={collection.collectionName}
+            >
+              {collection.collectionName}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <ul className="collection-items">
+          {collections.map((collection: any) => (
+            <li key={collection.collectionId} className="collection-item">
+              {collection.collectionName}
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <ul className="collection-items">
-        {collections.map((collection: any) => (
-          <li key={collection.Id} className="collection-item">
-            {collection.collectionName}
-          </li>
-        ))}
-      </ul>
       <AddIcon onAddIconClick={openModal} />
-      <button className="logOutBtn">LogOut</button>
-      <button className="nav-btn" onClick={toggleItems}>
-        Menu
+      <button className="logOutBtn" onClick={handleLogout}>
+        LogOut
       </button>
+      <button className="nav-btn">Menu</button>
     </div>
   );
 };

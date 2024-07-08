@@ -24,10 +24,9 @@ const Notes = () => {
       if (response.status == 200) {
         const data = response.data;
         const collectoinsArray = data["$values"].map((item: any) => ({
-          id: item.id,
+          collectionId: item.id,
           collectionName: item.collectionName,
         }));
-        console.log(collectoinsArray);
         setCollections(collectoinsArray);
       } else {
         console.error(

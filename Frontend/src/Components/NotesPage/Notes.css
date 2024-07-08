@@ -78,6 +78,7 @@ body {
   margin-right: 30px;
   border: none;
   text-align: center;
+  animation: dropDown 1s forwards;
 }
 .logOutBtn:hover {
   cursor: pointer;
@@ -94,12 +95,13 @@ body {
   margin-right: 40px;
   cursor: pointer;
   transition: all 0.3s;
+  animation: dropDown 1s forwards;
 }
 .nav-btn:hover {
   scale: 1.05;
   cursor: pointer;
 }
-@media (max-width: 100px) {
+@media (max-width: 1000px) {
   .collection-items,
   .logOutBtn,
   .add-icon {
@@ -175,4 +177,18 @@ body {
 .add-btn:enabled:hover {
   cursor: pointer;
   transform: scale(1.05);
+}
+
+.collection-select {
+  background-color: #f5f7f8;
+  text-wrap: nowrap;
+  border-radius: 10px;
+  margin-left: 2%;
+  width: 30%;
+  min-width: 350px;
+  padding: 8px;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  font-family: "Nunito", sans-serif;
 }

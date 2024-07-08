@@ -14,7 +14,6 @@ export const GetCollectionsAsync = async () => {
         },
       }
     );
-    console.log(response.data);
     return response;
   } catch (error) {
     console.error(`On get collections: ${error}`);
