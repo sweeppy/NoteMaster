@@ -155,9 +155,30 @@ body {
     dropDown 0.5s ease-out forwards;
 }
 
-.add-collection-input {
-  min-height: 30px;
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 70%;
 }
+
+.add-collection-input {
+  width: 100%;
+  min-height: 30px;
+  padding-right: 60px;
+}
+.border-red {
+  border: 1px solid #ff6969;
+}
+.char-count {
+  position: absolute;
+  right: 15px;
+  font-size: 12px;
+  color: #666;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
 .add-btn {
   opacity: 0.5;
   background-color: #379777;
