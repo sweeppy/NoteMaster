@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import withAuth from "../WithAuth";
 import AddCollection from "./AddCollection";
-import Collection from "./Collection";
+import Collection from "./CollectionStrip";
 import "./Notes.css";
 import SuccessAlert from "../SuccessAlert";
 import { addCollectionAsync } from "./Post/AddCollectionAsync";
 import DangerAlert from "../DangerAlert";
 import { GetCollectionsAsync } from "./Get/GetCollectionsAsync";
+import Note from "./Note";
 
 const Notes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,26 +19,26 @@ const Notes = () => {
   useEffect(() => {
     fetchCollections();
   }, []);
+
   const fetchCollections = async () => {
     try {
       const response = await GetCollectionsAsync();
-      if (response.status == 200) {
+      if (response.status === 200) {
         const data = response.data;
-        const collectoinsArray = data["$values"].map((item: any) => ({
+        const collectionsArray = data["$values"].map((item: any) => ({
           collectionId: item.id,
           collectionName: item.collectionName,
         }));
-        setCollections(collectoinsArray);
+        setCollections(collectionsArray);
       } else {
-        console.error(
-          `Failed to getch collections. Status: ${response.status}`
-        );
+        console.error(`Failed to get collections. Status: ${response.status}`);
       }
     } catch (error) {
       console.error(`Error fetching collections: ${error}`);
     }
   };
-  const openModal = () => {
+
+  const openAddCollectionModal = () => {
     setIsModalOpen(true);
   };
 
@@ -57,9 +58,12 @@ const Notes = () => {
   };
 
   return (
-    <div>
+    <div className="main-container">
       <div className="notes">
-        <Collection collections={collections} openModal={openModal} />
+        <Collection
+          collections={collections}
+          openModal={openAddCollectionModal}
+        />
       </div>
       {isModalOpen && (
         <div className="backdrop" onClick={closeModal}>
@@ -78,6 +82,7 @@ const Notes = () => {
           onClose={() => setDangerAlertText("")}
         />
       )}
+      <Note />
     </div>
   );
 };

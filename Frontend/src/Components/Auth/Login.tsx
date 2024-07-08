@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import "./Auth.css";
 import AuthBtn from "./AuthBtn";
 import AuthHeader from "./AuthHeader";
-import { backendLogin } from "./login";
+
 import { useNavigate } from "react-router-dom";
 import DangerAlert from "../DangerAlert";
-import React from "react";
+import { backendLogin } from "./postLogin";
 
 const Login = () => {
   const navigation = useNavigate();

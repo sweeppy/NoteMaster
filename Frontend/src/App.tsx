@@ -3,7 +3,7 @@ import Login from "./Components/Auth/Login";
 import SignUp from "./Components/Auth/SignUp";
 import WelcomePage from "./Components/WelcomePage/WelcomePage";
 import "./App.css";
-import Notes from "./Components/NotesPage/Notes";
+import Notes from "./Components/NotesPage/NotesPage.tsx";
 
 const App = () => {
   return (

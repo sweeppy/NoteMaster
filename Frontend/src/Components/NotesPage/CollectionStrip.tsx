@@ -23,7 +23,7 @@ const Collection = ({ openModal, collections }: Props) => {
   ) => {
     setSelectedCollection(event.target.value);
   };
-  const maxCollections = 3;
+  const maxCollections = 4;
   return (
     <div className="collection-strip">
       <div className="iconContainer">
