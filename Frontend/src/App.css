@@ -136,3 +136,25 @@ h3 {
 .close-btn:hover {
   color: #fff;
 }
+.btn {
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 5px;
+  border: none;
+  min-height: 40px;
+  min-width: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn:hover {
+  scale: 1.03;
+}
+
+.btn-apply {
+  background-color: #9cdba6;
+}
+
+.btn-danger {
+  background-color: #ff6969;
+}

@@ -40,57 +40,67 @@ body {
 .notes {
   font-family: "Nunito", sans-serif;
 }
-.notes-container {
-  font-family: "Nunito", sans-serif;
+.note-container {
+  height: 100%;
   display: flex;
+}
+
+.note-list-wrapper {
+  border-right: 3px solid #45474b;
+  min-width: 250px;
+  width: 20%;
   height: 100%;
 }
-
-.note-info {
-  width: 30%;
-  min-width: 200px;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-  overflow-y: auto;
-}
-
-.notes-list {
-  list-style: none;
-  padding: 0;
-}
-
-.note-in-list {
+.note-list {
+  height: 90%;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  margin-block-start: 0 !important;
   padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
-
-.note-in-list:hover {
-  background-color: #ddd;
+.note {
+  padding-left: 10px;
+  align-content: center;
+  list-style: none;
+  height: 40px;
+  border: 1px solid #45474b;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+}
+.note:hover {
+  cursor: pointer;
+  scale: 1.03;
 }
 
 .note-editor {
-  height: 100vh;
-  width: 100vw;
-  padding: 20px;
-}
-
-.note-editor h2 {
-  margin-bottom: 20px;
-}
-
-textarea.note {
+  font-family: "Nunito", sans-serif;
+  padding-left: 30px;
   height: 100%;
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+}
+.note-editor input {
+  width: 30%;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-size: 40px;
+}
+
+.note-editor textarea {
+  width: 90%;
+  height: 60%;
+  font-size: 20px;
+  border: 2px solid #45474b;
+  border-radius: 10px;
+  padding: 5px;
   resize: none;
-  box-sizing: border-box;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  padding-right: 10%;
 }
 
 .collection-strip {
