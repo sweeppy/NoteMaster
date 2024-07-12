@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "./Notes.css";
+import AddIcon from "./AddIcon";
 
 const Note = () => {
-  const [selectedNote, setSelectedNote] = useState("");
-  const [noteContent, setNoteContent] = useState("");
-
   const notes = [
     "Note1",
     "Note2",
@@ -24,6 +22,8 @@ const Note = () => {
     "444",
     "555",
   ];
+  const [selectedNote, setSelectedNote] = useState(notes[0]);
+  const [noteContent, setNoteContent] = useState("");
 
   const handleNoteClick = (note: string) => {
     setSelectedNote(note);
@@ -32,6 +32,10 @@ const Note = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedNote(e.target.value);
+  };
+
+  const handleAddNote = () => {
+    console.log("click");
   };
 
   return (
@@ -48,16 +52,21 @@ const Note = () => {
             </li>
           ))}
         </ul>
+        <AddIcon onAddIconClick={handleAddNote} className="add-note-icon" />
       </div>
       <div className="note-editor">
-        {selectedNote && (
+        {
           <>
-            <input
-              type="text"
-              value={selectedNote}
-              onChange={handleInputChange}
-              className="note-input"
-            />
+            <div className="note-header">
+              <input
+                type="text"
+                value={selectedNote}
+                onChange={handleInputChange}
+                className="note-input"
+              />
+              <div className="note-date">Updated at: 01.01.2001</div>
+            </div>
+
             <textarea
               className="note-textarea"
               value={noteContent}
@@ -68,7 +77,7 @@ const Note = () => {
               <button className="btn btn-danger mg-10">Delete note</button>
             </div>
           </>
-        )}
+        }
       </div>
     </div>
   );

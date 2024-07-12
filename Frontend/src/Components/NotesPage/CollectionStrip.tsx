@@ -54,7 +54,7 @@ const Collection = ({ openModal, collections }: Props) => {
         </ul>
       )}
 
-      <AddIcon onAddIconClick={openModal} />
+      <AddIcon onAddIconClick={openModal} className="add-icon" />
       <button className="logOutBtn" onClick={handleLogout}>
         LogOut
       </button>

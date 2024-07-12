@@ -31,7 +31,9 @@
 body {
   margin: 0 !important;
   overflow: hidden;
+  background-color: #45474b;
 }
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -46,7 +48,8 @@ body {
 }
 
 .note-list-wrapper {
-  border-right: 3px solid #45474b;
+  position: relative;
+  border-right: 3px solid #050506;
   min-width: 250px;
   width: 20%;
   height: 100%;
@@ -58,12 +61,23 @@ body {
   margin-block-start: 0 !important;
   padding: 10px;
 }
+.add-note-icon {
+  position: absolute;
+  bottom: 60px;
+  right: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.add-note-icon:hover {
+  transform: scale(1.2) rotateZ(180deg);
+}
 .note {
   padding-left: 10px;
   align-content: center;
   list-style: none;
   height: 40px;
-  border: 1px solid #45474b;
+  border: 1px solid #f5f7f8;
+  color: #f5f7f8;
   border-radius: 10px;
   margin-bottom: 10px;
   transition: all 0.3s;
@@ -74,25 +88,36 @@ body {
 }
 
 .note-editor {
+  background-color: #2d2e31;
   font-family: "Nunito", sans-serif;
   padding-left: 30px;
   height: 100%;
   width: 100%;
 }
+.note-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 50px;
+}
 .note-editor input {
   width: 30%;
   margin-top: 25px;
   margin-bottom: 30px;
-  font-size: 40px;
+  font-size: 30px;
 }
-
+.note-date {
+  font-weight: 500;
+  color: #f5f7f8;
+}
 .note-editor textarea {
   width: 90%;
   height: 60%;
   font-size: 20px;
   border: 2px solid #45474b;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
   resize: none;
 }
 
