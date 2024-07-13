@@ -1,5 +1,6 @@
 using Backend.Data;
 using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repositories
 {
@@ -29,6 +30,11 @@ namespace Backend.Repositories
         public Task<List<Collection>> getAllCollectionsAsync()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Collection> getCollectionByIdAsync(Guid id)
+        {
+           return await _db.Collections.FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }

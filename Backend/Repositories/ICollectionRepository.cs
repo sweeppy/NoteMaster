@@ -7,5 +7,6 @@ namespace Backend.Repositories
         public Task CreateCollectionAsync(User user,  string collectionName);
 
         public Task<List<Collection>> getAllCollectionsAsync();
+        public Task<Collection> getCollectionByIdAsync(Guid id);
     }
 }

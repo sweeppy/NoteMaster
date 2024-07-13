@@ -115,10 +115,10 @@ body {
   width: 90%;
   height: 60%;
   font-size: 20px;
-  border: 2px solid #45474b;
   border-radius: 10px;
   padding: 10px;
   resize: none;
+  outline: none;
 }
 
 .btn-container {
