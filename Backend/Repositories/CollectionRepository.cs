@@ -29,12 +29,12 @@ namespace Backend.Repositories
 
         public Task<List<Collection>> getAllCollectionsAsync()
         {
-            throw new NotImplementedException();
+            return _db.Collections.Include(c => c.Notes).ToListAsync();
         }
 
         public async Task<Collection> getCollectionByIdAsync(Guid id)
         {
-           return await _db.Collections.FirstOrDefaultAsync(c => c.Id == id);
+           return await _db.Collections.Include(c => c.Notes).FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }

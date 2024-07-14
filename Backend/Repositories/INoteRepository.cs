@@ -8,5 +8,7 @@ namespace Backend.Repositories
         public Task<Note> GetNoteByIdAsync(Guid id);
 
         public Task CreateNoteAsync(Collection collection, CreateNoteRequest details);
+
+        public List<Note> getAllNotes(Collection collection);
     }
 }

@@ -14,6 +14,14 @@
     transform: translateY(0);
   }
 }
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 @keyframes slideFromRight {
   0% {
     transform: translateX(100%);

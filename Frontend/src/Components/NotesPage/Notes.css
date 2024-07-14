@@ -31,13 +31,13 @@
 body {
   margin: 0 !important;
   overflow: hidden;
-  background-color: #45474b;
 }
 
 .main-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #45474b;
 }
 .notes {
   font-family: "Nunito", sans-serif;
@@ -45,6 +45,8 @@ body {
 .note-container {
   height: 100%;
   display: flex;
+  background-color: #45474b;
+  animation: fadeIn 1s forwards;
 }
 
 .note-list-wrapper {
@@ -106,8 +108,16 @@ body {
   margin-top: 25px;
   margin-bottom: 30px;
   font-size: 30px;
+  opacity: 0;
+  animation:
+    slideInFromTop 1s forwards 1s,
+    fadeIn 1s forwards 1s;
 }
 .note-date {
+  opacity: 0;
+  animation:
+    slideFromRight 1s 1s forwards,
+    fadeIn 1s 1s forwards;
   font-weight: 500;
   color: #f5f7f8;
 }
@@ -119,6 +129,10 @@ body {
   padding: 10px;
   resize: none;
   outline: none;
+  opacity: 0;
+  animation:
+    slideInFromTop 1s forwards 1s,
+    fadeIn 1s forwards 1s;
 }
 
 .btn-container {
@@ -126,10 +140,13 @@ body {
   justify-content: flex-end;
   padding-top: 10px;
   padding-right: 10%;
+  opacity: 0;
+  animation: fadeIn 1s 1s forwards;
 }
 
 .collection-strip {
   display: flex;
+  max-height: 52px;
   width: 100%;
   background-color: #45474b;
   border-bottom-left-radius: 10px;

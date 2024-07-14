@@ -34,5 +34,10 @@ namespace Backend.Repositories
         {
             return await _db.Notes.FirstOrDefaultAsync(n => n.Id == id);
         }
+
+        public List<Note> getAllNotes(Collection colllection)
+        {
+            return colllection.Notes.ToList();
+        }
     }
 }
