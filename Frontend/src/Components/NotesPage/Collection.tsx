@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   collections: any[];
   openModal: () => void;
+  onCollectionClick: (collectionId: string) => void;
 }
 
-const Collection = ({ openModal, collections }: Props) => {
+const Collection = ({ openModal, collections, onCollectionClick }: Props) => {
   const navigate = useNavigate();
   const [selectedCollection, setSelectedCollection] = useState("");
 
@@ -22,6 +23,7 @@ const Collection = ({ openModal, collections }: Props) => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedCollection(event.target.value);
+    onCollectionClick(event.target.value);
   };
   const maxCollections = 5;
   return (
@@ -38,7 +40,7 @@ const Collection = ({ openModal, collections }: Props) => {
           {collections.map((collection: any) => (
             <option
               key={collection.collectionId}
-              value={collection.collectionName}
+              value={collection.collectionId}
             >
               {collection.collectionName}
             </option>
@@ -47,7 +49,11 @@ const Collection = ({ openModal, collections }: Props) => {
       ) : (
         <ul className="collection-items">
           {collections.map((collection: any) => (
-            <li key={collection.collectionId} className="collection-item">
+            <li
+              key={collection.collectionId}
+              className="collection-item"
+              onClick={() => onCollectionClick(collection.collectionId)}
+            >
               {collection.collectionName}
             </li>
           ))}

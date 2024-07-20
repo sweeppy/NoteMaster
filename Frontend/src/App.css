@@ -30,6 +30,14 @@
     transform: translateX(0);
   }
 }
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 @keyframes fadeOut {
   from {
     opacity: 0.8;

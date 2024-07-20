@@ -18,14 +18,16 @@ namespace Backend.Controllers
             _repository = repository;
         }
         [HttpPost("getAll")]
-        public async Task<IActionResult> GetAllNotes([FromBody] Guid collectionId)
+        public async Task<IActionResult> GetAllNotes([FromBody]RequestWithCollectionId request)
         {
             var collection = await _repository.CollectionRepository
-            .getCollectionByIdAsync(collectionId);
+            .getCollectionByIdAsync(request.CollectoinId);
 
             if (collection == null) return NotFound("Collection not found.");
 
             var notes = _repository.NoteRepository.getAllNotes(collection);
+
+            if (notes == null) return NotFound();
             return Ok(notes);
         }
         [HttpPost("create")]

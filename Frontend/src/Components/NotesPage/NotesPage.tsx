@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import withAuth from "../WithAuth";
 import AddCollection from "./AddCollection";
-import Collection from "./CollectionStrip";
+import Collection from "./Collection";
 import "./Notes.css";
 import SuccessAlert from "../SuccessAlert";
 import { addCollectionAsync } from "./Post/AddCollectionAsync";
 import DangerAlert from "../DangerAlert";
-import { GetCollectionsAsync } from "./Get/GetCollectionsAsync";
 import Note from "./Note";
+import { FetchCollectionsAsync } from "./Get/GetCollectionsAsync";
+import { getAllNotesAsync } from "./Post/GetNotes";
 
 const Notes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,30 +21,17 @@ const Notes = () => {
     fetchCollections();
   }, []);
 
-  const fetchCollections = async () => {
-    try {
-      const response = await GetCollectionsAsync();
-      if (response.status === 200) {
-        const data = response.data;
-        const collectionsArray = data["$values"].map((item: any) => ({
-          collectionId: item.id,
-          collectionName: item.collectionName,
-        }));
-        setCollections(collectionsArray);
-      } else {
-        console.error(`Failed to get collections. Status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error(`Error fetching collections: ${error}`);
-    }
-  };
-
   const openAddCollectionModal = () => {
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const fetchCollections = async () => {
+    const collectionsArray = await FetchCollectionsAsync();
+    setCollections(collectionsArray);
   };
 
   const handleAddCollection = async (name: string) => {
@@ -57,12 +45,28 @@ const Notes = () => {
     closeModal();
   };
 
+  const [notes, setNotes] = useState([]);
+
+  const handleGetNotesByCollectionId = async (collectionId: string) => {
+    const response = await getAllNotesAsync(collectionId);
+    const data = response?.data;
+
+    const notesArray = data["$values"].map((note: any) => ({
+      noteId: note.id,
+      noteTitle: note.title,
+      noteCollectionId: note.collectionId,
+    }));
+    console.log(notesArray);
+    setNotes(notesArray);
+  };
+
   return (
     <div className="main-container">
       <div className="notes">
         <Collection
           collections={collections}
           openModal={openAddCollectionModal}
+          onCollectionClick={handleGetNotesByCollectionId}
         />
       </div>
       {isModalOpen && (
@@ -82,7 +86,7 @@ const Notes = () => {
           onClose={() => setDangerAlertText("")}
         />
       )}
-      <Note />
+      <Note notes={notes} />
     </div>
   );
 };

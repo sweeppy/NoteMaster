@@ -1,9 +1,6 @@
 import axios from "axios";
 
-interface Props {
-  collectionId: string;
-}
-export const getAllNotesAsync = async ({ collectionId }: Props) => {
+export const getAllNotesAsync = async (collectionId: string) => {
   try {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -12,7 +9,7 @@ export const getAllNotesAsync = async ({ collectionId }: Props) => {
     const response = await axios.post(
       "http://localhost:5062/NotesActions/getAll",
       {
-        collectionId,
+        collectoinId: collectionId,
       },
       {
         headers: {

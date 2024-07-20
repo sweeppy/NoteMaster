@@ -20,3 +20,21 @@ export const GetCollectionsAsync = async () => {
     throw error;
   }
 };
+
+export const FetchCollectionsAsync = async () => {
+  try {
+    const response = await GetCollectionsAsync();
+    if (response.status === 200) {
+      const data = response.data;
+      const collectionsArray = data["$values"].map((item: any) => ({
+        collectionId: item.id,
+        collectionName: item.collectionName,
+      }));
+      return collectionsArray;
+    } else {
+      console.error(`Failed to get collections. Status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`Error fetching collections: ${error}`);
+  }
+};

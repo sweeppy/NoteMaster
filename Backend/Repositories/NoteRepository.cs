@@ -37,6 +37,7 @@ namespace Backend.Repositories
 
         public List<Note> getAllNotes(Collection colllection)
         {
+            if (colllection.Notes == null) return null;
             return colllection.Notes.ToList();
         }
     }
