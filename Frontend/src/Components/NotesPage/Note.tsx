@@ -54,8 +54,6 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
       setsuccessAlertText(response.data);
       setIsModalOpen(false);
     } else {
-      console.log(response);
-      console.log("*");
       setDangerAlertText(response?.data);
     }
   };

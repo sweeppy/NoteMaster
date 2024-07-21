@@ -7,7 +7,7 @@ import { addCollectionAsync } from "./Post/AddCollectionAsync";
 import DangerAlert from "../DangerAlert";
 import Note from "./Note";
 import { FetchCollectionsAsync } from "./Get/GetCollectionsAsync";
-import { getAllNotesAsync } from "./Post/GetNotes";
+import { fetchGetAllNotesAsync } from "./Post/GetNotes";
 import AddWindow from "./AddWindow";
 
 const Notes = () => {
@@ -41,18 +41,8 @@ const Notes = () => {
   const [collectionId, setCollectionId] = useState("");
 
   const handleGetNotesByCollectionId = async (collectionId: string) => {
-    const response = await getAllNotesAsync(collectionId);
-    const data = response?.data;
-
-    const notesArray = data.map((note: any) => ({
-      noteId: note.id,
-      noteTitle: note.title,
-      noteDescription: note.description,
-      noteCollectionId: note.collectionId,
-      updatedAt: note.updatedAt,
-    }));
+    const notesArray = await fetchGetAllNotesAsync(collectionId);
     setCollectionId(collectionId);
-    console.log(data);
     setNotes(notesArray);
   };
 

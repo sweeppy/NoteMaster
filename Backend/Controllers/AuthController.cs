@@ -14,10 +14,13 @@ namespace Backend.Controllers
 
         private readonly IUserRepository _userRepository;
 
-        public AuthController(IJwtService jwtService, IUserRepository userRepository)
+        private readonly ILogger<AuthController> _logger;
+
+        public AuthController(IJwtService jwtService, IUserRepository userRepository, ILogger<AuthController> logger)
         {
             _jwtService = jwtService;
             _userRepository = userRepository;
+            _logger = logger;
         }
 
         [HttpPost("login")]
@@ -42,7 +45,8 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(ex.Message);
+                return BadRequest("Something went wrong.");
             }
         }
         
@@ -74,7 +78,8 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                _logger.LogError(ex.Message);
+                return BadRequest("Something went wrong.");
             }
         }
     }

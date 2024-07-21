@@ -53,12 +53,20 @@ namespace Backend.Controllers
         [Authorize]
         public async Task<IActionResult> GetAllCollections()
         {
-            var email = User.FindFirst(ClaimTypes.Email)?.Value;
-            if (email == null) return BadRequest("You need to login again.");
+            try
+            {
+                var email = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (email == null) return BadRequest("You need to login again.");
 
-            User user = await _repository.UserRepository.GetByEmailAsync(email);
+                User user = await _repository.UserRepository.GetByEmailAsync(email);
 
-            return Ok(user.Collections);
+                return Ok(user.Collections);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest("Something went wrong.");
+            }
         }
     }
 }

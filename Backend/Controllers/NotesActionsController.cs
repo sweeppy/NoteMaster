@@ -11,38 +11,73 @@ namespace Backend.Controllers
     [Route("[controller]")]
     public class NotesActionsController : ControllerBase
     {
-        IRepository _repository;
+        private readonly IRepository _repository;
 
-        public NotesActionsController(IRepository repository)
+        private readonly ILogger<NotesActionsController> _logger;
+
+        public NotesActionsController(IRepository repository, ILogger<NotesActionsController> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
         [HttpPost("getAll")]
         [Authorize]
         public async Task<IActionResult> GetAllNotes([FromBody]RequestWithCollectionId request)
         {
-            var collection = await _repository.CollectionRepository
-            .getCollectionByIdAsync(request.CollectoinId);
+            try
+            {
+                var collection = await _repository.CollectionRepository
+                .getCollectionByIdAsync(request.CollectoinId);
 
-            if (collection == null) return NotFound("Collection not found.");
+                if (collection == null) return NotFound("Collection not found.");
 
-            var notes = _repository.NoteRepository.getAllNotes(collection);
+                var notes = _repository.NoteRepository.getAllNotes(collection);
 
-            if (notes == null) return NotFound("No notes in this collection.");
-            return Ok(notes);
+                if (notes == null) return NotFound("No notes in this collection.");
+                return Ok(notes);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest("Something went wrong.");
+            }
         }
         [HttpPost("create")]
         [Authorize]
         public async Task<IActionResult> CreateNote ([FromBody] CreateNoteRequest request)
         {
-            Collection collection = await _repository.CollectionRepository
-            .getCollectionByIdAsync(request.collectionId);
-            
-            if (collection == null) return BadRequest("Selected collection was not found.");
+            try
+            {
+                Collection collection = await _repository.CollectionRepository
+                .getCollectionByIdAsync(request.collectionId);
+                
+                if (collection == null) return BadRequest("Selected collection was not found.");
 
-            await _repository.NoteRepository.CreateNoteAsync(collection, request);
+                await _repository.NoteRepository.CreateNoteAsync(collection, request);
 
-            return Ok($"{request.Title} was created!");
+                return Ok($"{request.Title} was created!");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest("Something went wrong.");
+            }
+        }
+        [HttpPost("update")]
+        [Authorize]
+        public async Task<IActionResult> UpdateNote([FromBody] UpdateNoteRequest request)
+        {
+            try
+            {
+                await _repository.NoteRepository.UpdateNoteAsync(request);
+                return Ok($"{request.Title} was updated.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest("Something went wrong.");
+            }
+
         }
     }
 }
