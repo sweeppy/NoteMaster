@@ -12,7 +12,7 @@ interface Props {
 
 const Collection = ({ openModal, collections, onCollectionClick }: Props) => {
   const navigate = useNavigate();
-  const [selectedCollection, setSelectedCollection] = useState("");
+  const [selectedCollectionId, setSelectedCollectionId] = useState("");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -22,7 +22,7 @@ const Collection = ({ openModal, collections, onCollectionClick }: Props) => {
   const handleChangingCollection = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedCollection(event.target.value);
+    setSelectedCollectionId(event.target.value);
     onCollectionClick(event.target.value);
   };
   const maxCollections = 5;
@@ -34,7 +34,7 @@ const Collection = ({ openModal, collections, onCollectionClick }: Props) => {
       {collections.length > maxCollections ? (
         <select
           className="collection-select"
-          value={selectedCollection}
+          value={selectedCollectionId}
           onChange={handleChangingCollection}
         >
           {collections.map((collection: any) => (

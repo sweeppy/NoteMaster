@@ -20,8 +20,8 @@ namespace Backend.Repositories
             Note note = new Note
             {
                 Title = details.Title,
-                Description = details.Description,
-                CreatedDate = DateTime.Now,
+                Description = "",
+                UpdatedAt = DateTime.UtcNow,
                 CollectionId = collection.Id,
                 Collection = collection,
             };
@@ -39,6 +39,19 @@ namespace Backend.Repositories
         {
             if (colllection.Notes == null) return null;
             return colllection.Notes.ToList();
+        }
+
+        public async Task UpdateNoteAsync(UpdateNoteRequest request)
+        {
+            var note = await _db.Notes.FirstOrDefaultAsync(n => n.Id == request.Id);
+
+            if (note == null) return;
+
+            note.Title = request.Title;
+            note.Description = request.Description;
+            note.UpdatedAt = DateTime.UtcNow;
+
+            await _db.SaveChangesAsync();
         }
     }
 }

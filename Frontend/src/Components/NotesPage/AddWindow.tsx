@@ -1,28 +1,28 @@
 import { useEffect, useState } from "react";
 import "./Notes.css";
 
-interface AddCollectionProps {
-  onAddCollection: (name: string) => void;
+interface AddProps {
+  onConfirm: (name: string) => void;
 }
 
-const AddCollection = ({ onAddCollection }: AddCollectionProps) => {
-  const [collectionName, setCollectionName] = useState("");
+const AddWindow = ({ onConfirm }: AddProps) => {
+  const [name, setname] = useState("");
   const [isAddBtnEnabled, setIsAddBtnEnabled] = useState(false);
   const [charCount, setCharCount] = useState(0);
 
   useEffect(() => {
-    setIsAddBtnEnabled(collectionName !== "" && charCount <= 25);
-  }, [collectionName]);
+    setIsAddBtnEnabled(name !== "" && charCount <= 25);
+  }, [name]);
 
   const handleAddCollection = () => {
-    if (collectionName.length <= 25) {
-      onAddCollection(collectionName);
+    if (name.length <= 25) {
+      onConfirm(name);
     }
   };
 
-  const handleInputText = (collectionName: string) => {
-    setCharCount(collectionName.length);
-    setCollectionName(collectionName);
+  const handleInputText = (name: string) => {
+    setCharCount(name.length);
+    setname(name);
   };
 
   return (
@@ -30,14 +30,14 @@ const AddCollection = ({ onAddCollection }: AddCollectionProps) => {
       className="add-collection-container"
       onClick={(e) => e.stopPropagation()}
     >
-      <h3>Enter the name of the collection</h3>
+      <h3>Enter the title</h3>
 
       <div className="input-wrapper">
         <input
           className={`add-collection-input ${charCount > 25 ? "border-red" : ""}`}
           type="text"
-          placeholder="Collection name"
-          value={collectionName}
+          placeholder="Title"
+          value={name}
           onChange={(e) => handleInputText(e.target.value)}
         />
         <div className="char-count">{charCount}/25</div>
@@ -54,4 +54,4 @@ const AddCollection = ({ onAddCollection }: AddCollectionProps) => {
   );
 };
 
-export default AddCollection;
+export default AddWindow;

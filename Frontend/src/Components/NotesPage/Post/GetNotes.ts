@@ -18,6 +18,7 @@ export const getAllNotesAsync = async (collectionId: string) => {
       }
     );
     if (response.status === 200) {
+      console.log(response);
       return response;
     }
   } catch (error: any) {

@@ -10,5 +10,7 @@ namespace Backend.Repositories
         public Task CreateNoteAsync(Collection collection, CreateNoteRequest details);
 
         public List<Note> getAllNotes(Collection collection);
+
+        public Task UpdateNoteAsync(UpdateNoteRequest request);
     }
 }

@@ -122,14 +122,14 @@ body {
   font-size: 30px;
   opacity: 0;
   animation:
-    slideInFromTop 1s forwards 1s,
-    fadeIn 1s forwards 1s;
+    slideInFromTop 1s forwards,
+    fadeIn 1s forwards;
 }
 .note-date {
   opacity: 0;
   animation:
-    slideFromRight 1s 1s forwards,
-    fadeIn 1s 1s forwards;
+    slideFromRight 1s forwards,
+    fadeIn 1s forwards;
   font-weight: 500;
   color: #f5f7f8;
 }
@@ -143,8 +143,8 @@ body {
   outline: none;
   opacity: 0;
   animation:
-    slideInFromTop 1s forwards 1s,
-    fadeIn 1s forwards 1s;
+    slideInFromTop 1s forwards,
+    fadeIn 1s forwards;
 }
 
 .btn-container {
@@ -153,7 +153,7 @@ body {
   padding-top: 10px;
   padding-right: 10%;
   opacity: 0;
-  animation: fadeIn 1s 1s forwards;
+  animation: fadeIn 1s forwards;
 }
 
 .collection-strip {

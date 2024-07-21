@@ -18,6 +18,7 @@ namespace Backend.Controllers
             _repository = repository;
         }
         [HttpPost("getAll")]
+        [Authorize]
         public async Task<IActionResult> GetAllNotes([FromBody]RequestWithCollectionId request)
         {
             var collection = await _repository.CollectionRepository

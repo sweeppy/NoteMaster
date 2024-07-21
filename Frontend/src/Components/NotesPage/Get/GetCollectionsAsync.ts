@@ -26,7 +26,7 @@ export const FetchCollectionsAsync = async () => {
     const response = await GetCollectionsAsync();
     if (response.status === 200) {
       const data = response.data;
-      const collectionsArray = data["$values"].map((item: any) => ({
+      const collectionsArray = data.map((item: any) => ({
         collectionId: item.id,
         collectionName: item.collectionName,
       }));
