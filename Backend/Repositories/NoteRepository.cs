@@ -49,7 +49,7 @@ namespace Backend.Repositories
 
             note.Title = request.Title;
             note.Description = request.Description;
-            note.UpdatedAt = DateTime.UtcNow;
+            note.UpdatedAt = DateTime.Now;
 
             await _db.SaveChangesAsync();
         }

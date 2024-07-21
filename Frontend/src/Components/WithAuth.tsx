@@ -14,12 +14,10 @@ const withAuth = (Component: React.ComponentType<any>) => {
       const currentTime = Date.now() / 1000;
 
       if (decodedToken.exp && decodedToken.exp < currentTime) {
-        // Токен истек
         localStorage.removeItem("token");
         return <Navigate to="/login" />;
       }
     } catch (error) {
-      // Невалидный токен
       localStorage.removeItem("token");
       return <Navigate to="/login" />;
     }

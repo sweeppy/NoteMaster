@@ -1,22 +1,21 @@
 import axios from "axios";
-export interface CreateNoteRequest {
-  title: string;
-  collectionId: string;
-}
-export const CreateNoteAsync = async ({
-  title,
-  collectionId,
-}: CreateNoteRequest) => {
+
+export const UpdateNoteInfoAsync = async (
+  noteId: string,
+  noteTitle: string,
+  noteDescription: string
+) => {
   try {
     const token = localStorage.getItem("token");
     if (!token) {
       throw Error("Token not found");
     }
     const response = await axios.post(
-      "http://localhost:5062/NotesActions/create",
+      "http://localhost:5062/NotesActions/update",
       {
-        title: title,
-        collectionId: collectionId,
+        id: noteId,
+        title: noteTitle,
+        description: noteDescription,
       },
       {
         headers: {
@@ -24,9 +23,10 @@ export const CreateNoteAsync = async ({
         },
       }
     );
+    console.log(response);
     return response;
   } catch (error: any) {
-    console.error(error.response.data);
+    console.log(error.response);
     return error.response;
   }
 };

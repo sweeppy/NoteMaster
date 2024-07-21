@@ -2,10 +2,11 @@ import "./Notes.css";
 import AddIcon from "./AddIcon";
 import { useState } from "react";
 import { format } from "date-fns";
-import { fetchCreateNoteAsync } from "./Post/CreateNoteAsync";
 import AddWindow from "./AddWindow";
 import DangerAlert from "../DangerAlert";
 import SuccessAlert from "../SuccessAlert";
+import { CreateNoteAsync } from "./Post/CreateNoteAsync";
+import { UpdateNoteInfoAsync } from "./Post/UpdateNoteInfo";
 interface NoteProps {
   notes: {
     noteId: string;
@@ -48,13 +49,27 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddNote = async (title: string) => {
-    const response = await fetchCreateNoteAsync({ title, collectionId });
-    if (response?.status == 200) {
-      await UpdateNotes();
+    const response = await CreateNoteAsync({ title, collectionId });
+    if (response.status == 200) {
+      UpdateNotes();
       setsuccessAlertText(response.data);
       setIsModalOpen(false);
     } else {
-      setDangerAlertText(response?.data);
+      setDangerAlertText(response.data);
+    }
+  };
+
+  const handleUpdateNoteInformation = async () => {
+    if (selectedNote) {
+      const response = await UpdateNoteInfoAsync(
+        selectedNote.noteId,
+        selectedNote.noteTitle,
+        selectedNote.noteDescription
+      );
+      if (response.status == 200) {
+        setsuccessAlertText(response.data);
+        await UpdateNotes();
+      } else setDangerAlertText(response.data);
     }
   };
 
@@ -109,7 +124,12 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
               value={selectedNote.noteDescription}
             ></textarea>
             <div className="btn-container">
-              <button className="btn btn-apply mg-10">Apply changes</button>
+              <button
+                onClick={handleUpdateNoteInformation}
+                className="btn btn-apply mg-10"
+              >
+                Apply changes
+              </button>
               <button className="btn btn-danger mg-10">Delete note</button>
             </div>
           </>

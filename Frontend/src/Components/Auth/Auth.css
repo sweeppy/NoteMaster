@@ -31,7 +31,8 @@ a:hover {
 input {
   padding-left: 10px;
   width: 70%;
-  height: 50px;
+  height: 13%;
+  min-height: 50px;
   border-radius: 10px;
   border: none;
   outline: none;
