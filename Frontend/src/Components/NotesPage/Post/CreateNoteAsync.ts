@@ -21,11 +21,10 @@ const CreateNoteAsync = async ({ title, collectionId }: CreateNoteRequest) => {
         },
       }
     );
-    if (response.status == 200) {
-      return response.data;
-    }
+    return response;
   } catch (error: any) {
     console.error(error.response.data);
+    return error.response;
   }
 };
 
@@ -33,8 +32,6 @@ export const fetchCreateNoteAsync = async ({
   title,
   collectionId,
 }: CreateNoteRequest) => {
-  const data = await CreateNoteAsync({ title, collectionId });
-  if (data != undefined) {
-    return data;
-  }
+  const response = await CreateNoteAsync({ title, collectionId });
+  return response;
 };

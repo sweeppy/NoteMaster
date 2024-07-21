@@ -28,7 +28,7 @@ namespace Backend.Controllers
 
             var notes = _repository.NoteRepository.getAllNotes(collection);
 
-            if (notes == null) return NotFound();
+            if (notes == null) return NotFound("No notes in this collection.");
             return Ok(notes);
         }
         [HttpPost("create")]
@@ -42,7 +42,7 @@ namespace Backend.Controllers
 
             await _repository.NoteRepository.CreateNoteAsync(collection, request);
 
-            return Ok("New note was created!");
+            return Ok($"{request.Title} was created!");
         }
     }
 }

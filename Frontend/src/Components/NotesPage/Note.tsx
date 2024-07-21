@@ -48,9 +48,16 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddNote = async (title: string) => {
-    await fetchCreateNoteAsync({ title, collectionId });
-    await UpdateNotes();
-    setIsModalOpen(false);
+    const response = await fetchCreateNoteAsync({ title, collectionId });
+    if (response?.status == 200) {
+      await UpdateNotes();
+      setsuccessAlertText(response.data);
+      setIsModalOpen(false);
+    } else {
+      console.log(response);
+      console.log("*");
+      setDangerAlertText(response?.data);
+    }
   };
 
   return (
