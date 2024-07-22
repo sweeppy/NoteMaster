@@ -21,7 +21,7 @@ namespace Backend.Repositories
             {
                 Title = details.Title,
                 Description = "",
-                UpdatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.Now,
                 CollectionId = collection.Id,
                 Collection = collection,
             };
@@ -52,6 +52,16 @@ namespace Backend.Repositories
             note.UpdatedAt = DateTime.Now;
 
             await _db.SaveChangesAsync();
+        }
+
+        public async Task DeleteNoteByIdAsync(Guid id)
+        {
+            var noteToDelete = await _db.Notes.FirstOrDefaultAsync(n => n.Id == id);
+            if (noteToDelete != null)
+            {
+                _db.Notes.Remove(noteToDelete);
+                await _db.SaveChangesAsync();
+            }
         }
     }
 }

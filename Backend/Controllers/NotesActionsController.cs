@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using Backend.Dto;
 using Backend.Models;
 using Backend.Repositories.MainRepository;
@@ -79,5 +78,21 @@ namespace Backend.Controllers
             }
 
         }
+
+        [HttpPost("delete")]
+        [Authorize]
+        public async Task<IActionResult> DeleteNote([FromBody] DeleteNoteRequest request)
+        {
+            try
+            {
+                await _repository.NoteRepository.DeleteNoteByIdAsync(request.Id);
+                return Ok("Note was deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest("Something went wrong.");
+            }
+        } 
     }
 }

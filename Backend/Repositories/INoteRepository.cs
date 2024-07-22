@@ -12,5 +12,7 @@ namespace Backend.Repositories
         public List<Note> getAllNotes(Collection collection);
 
         public Task UpdateNoteAsync(UpdateNoteRequest request);
+
+        public Task DeleteNoteByIdAsync(Guid id);
     }
 }

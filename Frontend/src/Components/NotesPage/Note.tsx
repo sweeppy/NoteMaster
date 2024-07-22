@@ -7,6 +7,7 @@ import DangerAlert from "../DangerAlert";
 import SuccessAlert from "../SuccessAlert";
 import { CreateNoteAsync } from "./Post/CreateNoteAsync";
 import { UpdateNoteInfoAsync } from "./Post/UpdateNoteInfo";
+import { deleteNoteAsync } from "./Post/DeleteNoteAsync";
 interface NoteProps {
   notes: {
     noteId: string;
@@ -20,7 +21,7 @@ interface NoteProps {
   UpdateNotes: () => void;
 }
 const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
-  const [successAlertText, setsuccessAlertText] = useState("");
+  const [successAlertText, setSuccessAlertText] = useState("");
   const [dangerAlertText, setDangerAlertText] = useState("");
 
   const handleChangeNoteHeader = (header: string) => {
@@ -52,7 +53,7 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
     const response = await CreateNoteAsync({ title, collectionId });
     if (response.status == 200) {
       UpdateNotes();
-      setsuccessAlertText(response.data);
+      setSuccessAlertText(response.data);
       setIsModalOpen(false);
     } else {
       setDangerAlertText(response.data);
@@ -67,9 +68,22 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
         selectedNote.noteDescription
       );
       if (response.status == 200) {
-        setsuccessAlertText(response.data);
-        await UpdateNotes();
+        setSuccessAlertText(response.data);
+        UpdateNotes();
       } else setDangerAlertText(response.data);
+    }
+  };
+
+  const handleDeleteNoteAsync = async () => {
+    if (selectedNote) {
+      const response = await deleteNoteAsync(selectedNote?.noteId);
+      if (response.status == 200) {
+        setSuccessAlertText(response.data);
+        UpdateNotes();
+        setSelectedNote(null);
+      } else {
+        setDangerAlertText(response.data);
+      }
     }
   };
 
@@ -130,7 +144,12 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
               >
                 Apply changes
               </button>
-              <button className="btn btn-danger mg-10">Delete note</button>
+              <button
+                onClick={handleDeleteNoteAsync}
+                className="btn btn-danger mg-10"
+              >
+                Delete note
+              </button>
             </div>
           </>
         )}
@@ -138,7 +157,7 @@ const Note = ({ notes, collectionId, UpdateNotes }: NoteProps) => {
       {successAlertText && (
         <SuccessAlert
           alertText={successAlertText}
-          onClose={() => setsuccessAlertText("")}
+          onClose={() => setSuccessAlertText("")}
         />
       )}
       {dangerAlertText && (

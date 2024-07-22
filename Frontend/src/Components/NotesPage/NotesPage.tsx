@@ -47,7 +47,7 @@ const Notes = () => {
   };
 
   const updateNotes = async () => {
-    handleGetNotesByCollectionId(collectionId);
+    await handleGetNotesByCollectionId(collectionId);
   };
   return (
     <div className="main-container">
