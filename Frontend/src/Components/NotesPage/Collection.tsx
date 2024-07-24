@@ -12,12 +12,16 @@ interface Props {
 
 const Collection = ({ openModal, collections, onCollectionClick }: Props) => {
   const navigate = useNavigate();
+
   const [selectedCollectionId, setSelectedCollectionId] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
+
+  const handleMenuClick = () => {};
 
   const handleChangingCollection = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -64,7 +68,10 @@ const Collection = ({ openModal, collections, onCollectionClick }: Props) => {
       <button className="logOutBtn" onClick={handleLogout}>
         LogOut
       </button>
-      <button className="nav-btn">Menu</button>
+      <button onClick={handleMenuClick} className="nav-btn">
+        Menu
+      </button>
+      {isMenuOpen && <div className="menu"></div>}
     </div>
   );
 };
